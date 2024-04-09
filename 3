@@ -1,0 +1,60 @@
+#include <stdio.h>
+
+// 计算最大连续子数组和
+int max_subarray_sum(int arr[], int n) {
+    if (n == 0) {
+        return 0;
+    }
+
+    int current_sum = 0; // 当前子段和
+    int max_sum = 0;     // 最大子段和
+
+    for (int i = 0; i < n; i++) {
+        current_sum += arr[i]; // 将当前元素加入子段和
+
+        // 更新最大子段和
+        if (current_sum > max_sum) {
+            max_sum = current_sum;
+        }
+
+        // 如果当前子段和小于等于0，重置为0
+        if (current_sum <= 0) {
+            current_sum = 0;
+        }
+    }
+
+    return max_sum;
+}
+
+// 测试函数，执行各种测试用例
+void run_tests() {
+    // 测试用例 1: 数组为空
+    int arr1[] = {};
+    int result1 = max_subarray_sum(arr1, 0);
+    printf("测试用例 1: 数组为空，最大连续子数组和为：%d\n", result1);
+
+    // 测试用例 2: 数组全为负数
+    int arr2[] = {-2, -5, -1, -9, -4};
+    int result2 = max_subarray_sum(arr2, 5);
+    printf("测试用例 2: 数组全为负数，最大连续子数组和为：%d\n", result2);
+
+    // 测试用例 3: 数组全为正数
+    int arr3[] = {3, 8, 1, 6};
+    int result3 = max_subarray_sum(arr3, 4);
+    printf("测试用例 3: 数组全为正数，最大连续子数组和为：%d\n", result3);
+
+    // 测试用例 4: 数组包含正数、负数和零
+    int arr4[] = {4, -2, 6, -10, 8, 1, 5};
+    int result4 = max_subarray_sum(arr4, 7);
+    printf("测试用例 4: 数组包含正数、负数和零，最大连续子数组和为：%d\n", result4);
+
+    // 测试用例 5: 数组只有一个元素
+    int arr5[] = {10};
+    int result5 = max_subarray_sum(arr5, 1);
+    printf("测试用例 5: 数组只有一个元素，最大连续子数组和为：%d\n", result5);
+}
+
+int main() {
+    run_tests(); // 执行测试函数
+    return 0;
+}
